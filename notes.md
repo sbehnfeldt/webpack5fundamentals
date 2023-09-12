@@ -129,3 +129,43 @@ Then run the script:
 ```shell
 $> npm run dev
 ```
+
+## Lesson 4) Babel
+ref: https://www.youtube.com/watch?v=qqOrC6-jRSw&list=PLB67cosR0_lPUXIK35J8M7EQUbUJQMA0Q&index=4
+ref: https://babeljs.io
+
+Babel is a JS transpiler;  converts modern JS into an older version for older browsers.
+babel-loader is a webpack loader, which tells webpack how to process files which match a certain test
+(usually filename regex)
+
+**Installation**  
+```shell
+$> npm i -D babel-loader @babel/core @babel/preset-env
+```
+**Configuration** Tell webpack: every time you come across a .js or .mjs file, 
+run it through the Babel loader.
+_webpack.config.js_  
+```js
+{
+    module: {
+        rules: [{
+            test: /\.m?js$/,
+            exclude: /node_modules/,
+            use: {
+                loader: "babel-loader",
+                options: {
+                    presets: ['@babel/preset-env']
+                }
+            }
+        }
+    ]}
+}
+```
+
+**Babel Configuration**  
+_.babelrc_
+```json
+{
+    "presets" : ["@babel/preset-env"]
+}
+```

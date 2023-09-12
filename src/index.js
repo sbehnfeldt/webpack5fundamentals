@@ -1,2 +1,5 @@
-console.log( 'Hello from webpack' );
-alert( "Hello" );
+const foo = (name) => {
+    console.log( `Hello, ${name}!`);
+}
+
+foo("Barney Banjo" );
