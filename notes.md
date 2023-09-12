@@ -29,7 +29,7 @@ Core concepts:
 - Browser Compatibility
   - not covered explicitly in this course, as browser compatibility issues will be handled by the Babel transpiler plugin
 
-## Lesson 2) Installation & Setup 
+## Lesson 2) Installation & Setup
 ref: https://www.youtube.com/watch?v=sZYnwFrwXAw&list=PLB67cosR0_lPUXIK35J8M7EQUbUJQMA0Q&index=2  
 ref: https://github.com/robertguss/webpack-5-fundamentals-course  
 ref: https://webpack.js.org/guides/getting-started/  
@@ -80,4 +80,52 @@ _package.json_
 Then execute webpack via the package.json script:
 ```shell
 $> npm run build
+```
+
+## Lesson 3) Webpack Dev Server & Hot Module Reloading (HMR)
+ref: https://www.youtube.com/watch?v=w442h9e2_gQ&list=PLB67cosR0_lPUXIK35J8M7EQUbUJQMA0Q&index=3  
+ref: https://webpack.js.org/guides/development/#using-webpack-dev-server  
+
+The webpack-dev-server NodeJS dependency provides a rudimentary web server the provides live reloading. 
+```shell
+$> npm i -D webpack-dev-server
+```
+Add the following to _webpack.config.js_ to tell webpack-dev-server where to serve the files from:
+```js
+module.exports = {
+  devServer: {
+    static: './dist'
+  },
+}
+```
+Note that the devServer key "static" has changed from the key that was specified in the video series, "contentBase".
+
+**html-webpack-plugin**  
+Generate an HTML file that includes all the webpack bundles.  Includes all entry points
+```shell
+$> npm i -D html-webpack-plugin
+```
+Add the following to _webpack.config.js_ to instantiate the functionality:
+```js
+const HtmlWebpackPlugin = require( 'html-webpack-plugin');
+module.exports = {
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: 'Development'
+        }),
+    ],
+}
+```
+Add the following script to package.json:
+```json
+{
+  "scripts": {
+    "dev": "webpack-dev-server --open",
+    "build": "webpack"
+  }
+}
+```
+Then run the script: 
+```shell
+$> npm run dev
 ```
